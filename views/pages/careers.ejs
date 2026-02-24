@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= title %></title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<div id="cursor"></div><div id="cursor-ring"></div>
+<%- include('../partials/navbar') %>
+<div class="page-hero">
+  <div class="page-hero-bg"></div><div class="grid-bg"></div>
+  <div class="page-hero-content">
+    <span class="page-tag">Work With Us</span>
+    <h1>Join Our <span>Team</span></h1>
+    <p>Help us revolutionize car care. We're building the future of clean.</p>
+  </div>
+</div>
+<section class="section">
+  <div class="container">
+    <div class="reveal" style="text-align:center;margin-bottom:2rem;"><span class="section-label">Open Positions</span><h2 class="section-title">Build the Future of <span>Clean</span></h2></div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:2rem;">
+      <div style="background:rgba(10,10,22,0.7);border:1px solid var(--border);padding:2rem;" class="reveal">
+        <h3 style="color:white;font-family:Orbitron,monospace;">Full-Stack Engineer</h3>
+        <div style="font-size:0.85rem;color:var(--text);margin:1rem 0;"><strong>Lagos · Full-time</strong></div>
+        <p style="font-size:0.9rem;color:var(--text);margin-bottom:1.5rem;">Build and scale web and mobile platforms.</p>
+        <button style="padding:0.6rem 1.2rem;background:var(--cyan);color:var(--dark);border:none;font-weight:700;cursor:pointer;">Apply Now</button>
+      </div>
+      <div style="background:rgba(10,10,22,0.7);border:1px solid var(--border);padding:2rem;" class="reveal">
+        <h3 style="color:white;font-family:Orbitron,monospace;">Operations Manager</h3>
+        <div style="font-size:0.85rem;color:var(--text);margin:1rem 0;"><strong>Lagos/FCT · Full-time</strong></div>
+        <p style="font-size:0.9rem;color:var(--text);margin-bottom:1.5rem;">Lead teams and optimize operations.</p>
+        <button style="padding:0.6rem 1.2rem;background:var(--cyan);color:var(--dark);border:none;font-weight:700;cursor:pointer;">Apply Now</button>
+      </div>
+      <div style="background:rgba(10,10,22,0.7);border:1px solid var(--border);padding:2rem;" class="reveal">
+        <h3 style="color:white;font-family:Orbitron,monospace;">Marketing Specialist</h3>
+        <div style="font-size:0.85rem;color:var(--text);margin:1rem 0;"><strong>Lagos · Full-time</strong></div>
+        <p style="font-size:0.9rem;color:var(--text);margin-bottom:1.5rem;">Create campaigns driving growth.</p>
+        <button style="padding:0.6rem 1.2rem;background:var(--cyan);color:var(--dark);border:none;font-weight:700;cursor:pointer;">Apply Now</button>
+      </div>
+    </div>
+  </div>
+</section>
+<%- include('../partials/footer') %>
+<script src="/js/main.js"></script>
+</body>
+</html>

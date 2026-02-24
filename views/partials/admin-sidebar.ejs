@@ -1,0 +1,35 @@
+<div style="display:flex;height:100vh;margin-top:72px;">
+  <aside style="width:250px;background:rgba(3,6,18,0.95);border-right:1px solid rgba(0,245,255,0.1);padding:2rem 1.5rem;position:fixed;left:0;top:0;height:100vh;overflow-y:auto;">
+    <div style="padding:1rem 0;margin-bottom:2rem;border-bottom:1px solid rgba(0,245,255,0.1);">
+      <div style="font-family:'Orbitron',monospace;font-size:1.2rem;font-weight:900;color:white;">
+        <em style="color:var(--cyan);font-style:normal;text-shadow:0 0 16px var(--cyan);">AURA</em>WASH
+      </div>
+      <div style="font-size:0.7rem;color:var(--text);letter-spacing:1px;margin-top:0.3rem;">ADMIN PANEL</div>
+    </div>
+    
+    <nav style="display:flex;flex-direction:column;gap:0.3rem;">
+      <a href="/admin/dashboard" style="display:flex;align-items:center;padding:0.8rem 1rem;border-radius:6px;text-decoration:none;color:var(--text);transition:all 0.3s;border:1px solid transparent;" onmouseover="this.style.background='rgba(0,245,255,0.08)';this.style.borderColor='rgba(0,245,255,0.2)';this.style.color='var(--cyan)'" onmouseout="this.style.background='transparent';this.style.borderColor='transparent';this.style.color='var(--text)'">
+        📊 Dashboard
+      </a>
+      <a href="/admin/signups" style="display:flex;align-items:center;padding:0.8rem 1rem;border-radius:6px;text-decoration:none;color:var(--text);transition:all 0.3s;border:1px solid transparent;" onmouseover="this.style.background='rgba(0,245,255,0.08)';this.style.borderColor='rgba(0,245,255,0.2)';this.style.color='var(--cyan)'" onmouseout="this.style.background='transparent';this.style.borderColor='transparent';this.style.color='var(--text)'">
+        👥 Signups
+        <% if (typeof newSignups !== 'undefined' && newSignups > 0) { %>
+          <span style="margin-left:auto;background:var(--cyan);color:var(--dark);font-size:0.7rem;padding:0.2rem 0.5rem;border-radius:99px;font-weight:700;"><%= newSignups %></span>
+        <% } %>
+      </a>
+      <a href="/admin/contacts" style="display:flex;align-items:center;padding:0.8rem 1rem;border-radius:6px;text-decoration:none;color:var(--text);transition:all 0.3s;border:1px solid transparent;" onmouseover="this.style.background='rgba(0,245,255,0.08)';this.style.borderColor='rgba(0,245,255,0.2)';this.style.color='var(--cyan)'" onmouseout="this.style.background='transparent';this.style.borderColor='transparent';this.style.color='var(--text)'">
+        📧 Contact Reqs
+        <% if (typeof unreadContacts !== 'undefined' && unreadContacts > 0) { %>
+          <span style="margin-left:auto;background:#FF6B6B;color:white;font-size:0.7rem;padding:0.2rem 0.5rem;border-radius:99px;font-weight:700;"><%= unreadContacts %></span>
+        <% } %>
+      </a>
+      <a href="/admin/logout" style="display:flex;align-items:center;padding:0.8rem 1rem;border-radius:6px;text-decoration:none;color:var(--text);transition:all 0.3s;border:1px solid transparent;margin-top:1rem;" onmouseover="this.style.background='rgba(255,107,107,0.1)';this.style.borderColor='rgba(255,107,107,0.3)';this.style.color='#FF6B6B'" onmouseout="this.style.background='transparent';this.style.borderColor='transparent';this.style.color='var(--text)'">
+        🚪 Logout
+      </a>
+    </nav>
+  </aside>
+  
+  <div style="flex:1;margin-left:250px;overflow-y:auto;">
+    <%- body %>
+  </div>
+</div>

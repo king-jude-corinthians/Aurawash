@@ -1,0 +1,220 @@
+/* Admin Dashboard CSS */
+
+body {
+  background: var(--dark);
+  color: var(--text2);
+  font-family: 'Rajdhani', sans-serif;
+}
+
+/* Sidebar Layout */
+aside {
+  background: rgba(3, 6, 18, 0.95);
+  border-right: 1px solid rgba(0, 245, 255, 0.1);
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 250px;
+  height: 100vh;
+  overflow-y: auto;
+  z-index: 1000;
+  padding: 2rem 1.5rem;
+}
+
+main {
+  margin-left: 250px;
+  min-height: 100vh;
+  background: linear-gradient(135deg, var(--dark) 0%, rgba(0, 30, 60, 0.05) 100%);
+}
+
+/* Tables */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+thead {
+  background: rgba(0, 85, 221, 0.1);
+}
+
+th {
+  padding: 1rem;
+  text-align: left;
+  font-family: 'Orbitron', monospace;
+  font-size: 0.7rem;
+  color: var(--cyan);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  border-bottom: 1px solid var(--border);
+}
+
+td {
+  padding: 0.9rem 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+tr:hover {
+  background: rgba(0, 245, 255, 0.02);
+}
+
+/* Forms */
+input, select, textarea {
+  width: 100%;
+  padding: 0.8rem;
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(0, 245, 255, 0.15);
+  color: white;
+  font-family: 'Rajdhani', sans-serif;
+  border-radius: 4px;
+  transition: all 0.3s;
+}
+
+input:focus, select:focus, textarea:focus {
+  border-color: rgba(0, 245, 255, 0.5);
+  box-shadow: 0 0 8px rgba(0, 245, 255, 0.1);
+  outline: none;
+}
+
+/* Buttons */
+button {
+  padding: 0.7rem 1.2rem;
+  background: var(--cyan);
+  color: var(--dark);
+  border: none;
+  border-radius: 6px;
+  font-family: 'Orbitron', monospace;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+button:hover {
+  box-shadow: 0 0 16px rgba(0, 245, 255, 0.3);
+  transform: scale(1.02);
+}
+
+/* Status Badges */
+.status-badge {
+  display: inline-block;
+  padding: 0.3rem 0.8rem;
+  border-radius: 99px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: capitalize;
+}
+
+.status-new {
+  background: rgba(0, 245, 255, 0.1);
+  color: var(--cyan);
+}
+
+.status-unread {
+  background: rgba(244, 67, 54, 0.1);
+  color: #f44336;
+}
+
+.status-read {
+  background: rgba(255, 200, 87, 0.1);
+  color: #ffc857;
+}
+
+.status-replied .status-active {
+  background: rgba(76, 175, 80, 0.1);
+  color: #4caf50;
+}
+
+/* Cards */
+.stat-card {
+  background: rgba(0, 85, 221, 0.1);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--blue);
+  padding: 1.5rem;
+  border-radius: 8px;
+  transition: all 0.3s;
+}
+
+.stat-card:hover {
+  border-color: rgba(0, 245, 255, 0.3);
+  transform: translateY(-2px);
+}
+
+.stat-value {
+  font-family: 'Orbitron', monospace;
+  font-size: 2rem;
+  font-weight: 900;
+  color: var(--cyan);
+  margin: 0.5rem 0;
+}
+
+.stat-label {
+  font-size: 0.8rem;
+  color: var(--text);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+
+/* Sidebar Nav */
+nav a {
+  display: flex;
+  align-items: center;
+  padding: 0.8rem 1rem;
+  color: var(--text);
+  text-decoration: none;
+  border-radius: 6px;
+  transition: all 0.3s;
+  border: 1px solid transparent;
+  margin-bottom: 0.3rem;
+  font-size: 0.9rem;
+}
+
+nav a:hover {
+  background: rgba(0, 245, 255, 0.08);
+  border-color: rgba(0, 245, 255, 0.2);
+  color: var(--cyan);
+}
+
+/* Badges */
+.badge {
+  display: inline-block;
+  background: var(--cyan);
+  color: var(--dark);
+  font-size: 0.7rem;
+  padding: 0.2rem 0.5rem;
+  border-radius: 99px;
+  font-weight: 700;
+  margin-left: auto;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  aside {
+    width: 200px;
+    padding: 1.5rem 1rem;
+  }
+
+  main {
+    margin-left: 200px;
+  }
+
+  table {
+    font-size: 0.8rem;
+  }
+
+  th, td {
+    padding: 0.7rem;
+  }
+}
+
+@media (max-width: 600px) {
+  aside {
+    display: none;
+  }
+
+  main {
+    margin-left: 0;
+  }
+}

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= title %></title>
+  <link rel="stylesheet" href="/css/style.css">
+  <style>.plan-card{background:rgba(10,10,22,0.6);border:1px solid var(--border);padding:2rem;text-align:center;}.plan-price{font-size:1.8rem;font-weight:900;color:var(--cyan);margin:1rem 0;}</style>
+</head>
+<body>
+<div id="cursor"></div><div id="cursor-ring"></div>
+<%- include('../partials/navbar') %>
+<div class="page-hero">
+  <div class="page-hero-bg"></div><div class="grid-bg"></div>
+  <div class="page-hero-content">
+    <span class="page-tag">AURA Unlimited®</span>
+    <h1>Become a <span>Member</span></h1>
+    <p>Unlimited washes, express lane, exclusive perks. One monthly rate. No contracts. Cancel anytime.</p>
+  </div>
+</div>
+<section class="section">
+  <div class="container">
+    <div class="reveal" style="margin-bottom:2rem;"><span class="section-label">Membership Plans</span><h2 class="section-title">Choose Your <span>Pass</span></h2></div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:2rem;">
+      <div class="plan-card reveal">
+        <h3 style="color:white;">Basic Pass</h3>
+        <div class="plan-price">₦22,800</div>
+        <p style="font-size:0.85rem;color:var(--text);margin:1rem 0;">4 basic washes/month</p>
+        <button style="padding:0.7rem 1.4rem;background:var(--cyan);color:var(--dark);border:none;font-weight:700;cursor:pointer;width:100%;">Get Plan</button>
+      </div>
+      <div class="plan-card reveal" style="border:2px solid var(--cyan);">
+        <div style="background:rgba(0,245,255,0.1);padding:0.3rem;margin:-2rem -2rem 1rem -2rem;"><strong style="color:var(--cyan);font-size:0.8rem;">MOST POPULAR</strong></div>
+        <h3 style="color:white;">Pro Pass</h3>
+        <div class="plan-price">₦46,800</div>
+        <p style="font-size:0.85rem;color:var(--text);margin:1rem 0;">Unlimited basic + 2 premium/month</p>
+        <button style="padding:0.7rem 1.4rem;background:var(--cyan);color:var(--dark);border:none;font-weight:700;cursor:pointer;width:100%;">Get Plan</button>
+      </div>
+      <div class="plan-card reveal">
+        <h3 style="color:white;">Elite Pass</h3>
+        <div class="plan-price">₦94,800</div>
+        <p style="font-size:0.85rem;color:var(--text);margin:1rem 0;">Unlimited all tiers + VIP perks</p>
+        <button style="padding:0.7rem 1.4rem;background:var(--cyan);color:var(--dark);border:none;font-weight:700;cursor:pointer;width:100%;">Get Plan</button>
+      </div>
+    </div>
+  </div>
+</section>
+<%- include('../partials/footer') %>
+<script src="/js/main.js"></script>
+</body>
+</html>

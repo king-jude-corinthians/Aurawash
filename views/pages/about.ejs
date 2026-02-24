@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= title %></title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<div id="cursor"></div><div id="cursor-ring"></div>
+<%- include('../partials/navbar') %>
+<div class="page-hero">
+  <div class="page-hero-bg"></div><div class="grid-bg"></div>
+  <div class="page-hero-content">
+    <span class="page-tag">Our Story</span>
+    <h1>About <span>AURA WASH</span></h1>
+    <p>From a single location to 500+ nationwide — redefining car care through technology and excellence.</p>
+  </div>
+</div>
+<section class="section">
+  <div class="container">
+    <div class="reveal" style="margin-bottom:3rem;"><span class="section-label">Who We Are</span><h2 class="section-title">Built for <span>Speed. Built for Clean.</span></h2></div>
+    <div class="split reveal" style="display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center;">
+      <div>
+        <p style="font-size:1rem;color:var(--text);line-height:1.8;margin-bottom:1.2rem;">AURA WASH was founded on a simple mission: give every driver access to premium, fast, and affordable car wash experiences. We believe your car deserves to look great.</p>
+        <p style="font-size:1rem;color:var(--text);line-height:1.8;">Our AI-powered systems deliver precision results faster than traditional washes. Over 350,000 active members and millions of customers trust us.</p>
+      </div>
+      <div style="background:linear-gradient(135deg,rgba(0,85,221,0.1),rgba(0,245,255,0.04));border:1px solid var(--border);padding:3rem;text-align:center;">
+        <div style="font-size:4rem;margin-bottom:1rem;">🚗</div>
+        <div style="font-family:'Orbitron',monospace;font-size:0.6rem;letter-spacing:3px;color:var(--cyan);margin-bottom:0.5rem;">OUR MISSION</div>
+        <p style="font-size:1.05rem;color:white;line-height:1.7;font-style:italic;">"Make premium car care fast, affordable, and accessible to everyone."</p>
+      </div>
+    </div>
+  </div>
+</section>
+<%- include('../partials/footer') %>
+<script src="/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= title %></title>
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/admin.css">
+</head>
+<body>
+<%- include('../partials/admin-sidebar') %>
+<div style="padding:2rem;max-width:1400px;">
+  <h1 style="color:white;font-family:'Orbitron',monospace;margin-bottom:2rem;">👥 User Signups</h1>
+  
+  <div style="background:rgba(10,10,22,0.6);border:1px solid var(--border);border-radius:8px;overflow:hidden;">
+    <table style="width:100%;border-collapse:collapse;">
+      <thead>
+        <tr style="background:rgba(0,85,221,0.1);border-bottom:1px solid var(--border);">
+          <th style="padding:1rem;text-align:left;font-family:'Orbitron',monospace;font-size:0.7rem;color:var(--cyan);letter-spacing:1px;text-transform:uppercase;">Name</th>
+          <th style="padding:1rem;text-align:left;font-family:'Orbitron',monospace;font-size:0.7rem;color:var(--cyan);letter-spacing:1px;text-transform:uppercase;">Email</th>
+          <th style="padding:1rem;text-align:left;font-family:'Orbitron',monospace;font-size:0.7rem;color:var(--cyan);letter-spacing:1px;text-transform:uppercase;">Phone</th>
+          <th style="padding:1rem;text-align:left;font-family:'Orbitron',monospace;font-size:0.7rem;color:var(--cyan);letter-spacing:1px;text-transform:uppercase;">Plan</th>
+          <th style="padding:1rem;text-align:left;font-family:'Orbitron',monospace;font-size:0.7rem;color:var(--cyan);letter-spacing:1px;text-transform:uppercase;">Status</th>
+          <th style="padding:1rem;text-align:left;font-family:'Orbitron',monospace;font-size:0.7rem;color:var(--cyan);letter-spacing:1px;text-transform:uppercase;">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% users.forEach(user => { %>
+          <tr style="border-bottom:1px solid var(--border);hover{background:rgba(0,245,255,0.03);}">
+            <td style="padding:1rem;color:white;"><%= user.firstName %> <%= user.lastName %></td>
+            <td style="padding:1rem;color:var(--text);"><%= user.email %></td>
+            <td style="padding:1rem;color:var(--text);"><%= user.phone || '—' %></td>
+            <td style="padding:1rem;color:var(--text);"><%= user.plan || '—' %></td>
+            <td style="padding:1rem;"><span style="padding:0.3rem 0.8rem;border-radius:99px;background:rgba(0,245,255,0.1);color:var(--cyan);font-size:0.75rem;font-weight:700;"><%= user.status %></span></td>
+            <td style="padding:1rem;">
+              <form method="POST" action="/admin/signups/<%= user._id %>/status" style="display:inline;">
+                <select name="status" onchange="this.form.submit()" style="padding:0.4rem;background:rgba(0,0,0,0.4);border:1px solid var(--border);color:white;border-radius:4px;cursor:pointer;font-size:0.8rem;">
+                  <option value="new" <%= user.status === 'new' ? 'selected' : '' %>>new</option>
+                  <option value="contacted" <%= user.status === 'contacted' ? 'selected' : '' %>>contacted</option>
+                  <option value="active" <%= user.status === 'active' ? 'selected' : '' %>>active</option>
+                  <option value="inactive" <%= user.status === 'inactive' ? 'selected' : '' %>>inactive</option>
+                </select>
+              </form>
+              <form method="POST" action="/admin/signups/<%= user._id %>?_method=DELETE" style="display:inline;margin-left:0.5rem;">
+                <button type="submit" style="padding:0.4rem 0.8rem;background:#f44336;color:white;border:none;cursor:pointer;border-radius:4px;font-size:0.75rem;" onclick="return confirm('Delete this signup?')">Delete</button>
+              </form>
+            </td>
+          </tr>
+        <% }); %>
+      </tbody>
+    </table>
+    <% if (users.length === 0) { %>
+      <div style="text-align:center;padding:3rem;color:var(--text);">No signups yet.</div>
+    <% } %>
+  </div>
+</div>
+</body>
+</html>
