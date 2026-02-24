@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>AURA WASH — Future of Clean</title>
+<link rel="stylesheet" href="style.css">
+<style>
+/* HOME-SPECIFIC */
+.hero { position:relative; min-height:100vh; display:flex; align-items:center; overflow:hidden; padding-top:72px; }
+.hero-bg { position:absolute; inset:0; }
+.grid-bg { position:absolute; inset:0; background-image:linear-gradient(rgba(0,136,255,0.06) 1px,transparent 1px),linear-gradient(90deg,rgba(0,136,255,0.06) 1px,transparent 1px); background-size:55px 55px; transform:perspective(600px) rotateX(30deg) scale(1.6); transform-origin:center bottom; animation:gridDrift 20s linear infinite; }
+@keyframes gridDrift { from{background-position:0 0;} to{background-position:0 55px;} }
+.stars-wrap { position:absolute; inset:0; overflow:hidden; }
+.glow-orb { position:absolute; border-radius:50%; filter:blur(80px); }
+.orb1 { width:500px; height:500px; background:rgba(0,85,221,0.12); top:-100px; right:-100px; }
+.orb2 { width:350px; height:350px; background:rgba(0,245,255,0.06); bottom:100px; left:-80px; }
+.hero-inner { position:relative; z-index:2; display:grid; grid-template-columns:1fr 1fr; gap:4rem; align-items:center; max-width:1280px; margin:0 auto; padding:4rem 5%; width:100%; }
+.hero-text { }
+.hero-eyebrow { font-family:'Orbitron',monospace; font-size:0.62rem; letter-spacing:4px; color:var(--cyan); text-transform:uppercase; margin-bottom:1.2rem; display:flex; align-items:center; gap:0.8rem; }
+.hero-eyebrow::before { content:''; display:block; width:24px; height:1px; background:var(--cyan); }
+.hero-text h1 { font-family:'Orbitron',monospace; font-weight:900; font-size:clamp(2rem,4.5vw,3.8rem); line-height:1.08; color:white; margin-bottom:1.5rem; }
+.hero-text h1 .line2 { color:var(--cyan); text-shadow:0 0 40px rgba(0,245,255,0.4); display:block; }
+.hero-text p { font-size:1.05rem; color:var(--text); line-height:1.75; max-width:500px; margin-bottom:2.5rem; }
+.hero-stats { display:flex; gap:1.5rem; margin-bottom:2.5rem; flex-wrap:wrap; }
+.hstat { background:rgba(0,245,255,0.04); border:1px solid rgba(0,245,255,0.15); padding:0.7rem 1.2rem; position:relative; }
+.hstat::before { content:''; position:absolute; top:0; left:0; width:3px; height:100%; background:var(--cyan); }
+.hstat .v { font-family:'Orbitron',monospace; font-size:1.3rem; font-weight:700; color:var(--cyan); }
+.hstat .l { font-size:0.68rem; color:rgba(0,245,255,0.5); letter-spacing:1px; text-transform:uppercase; }
+.hero-ctas { display:flex; gap:1rem; flex-wrap:wrap; }
+.hero-car { display:flex; align-items:center; justify-content:center; }
+.car-wrap { position:relative; width:100%; }
+.car-float { animation:carFloat 4s ease-in-out infinite; }
+@keyframes carFloat { 0%,100%{transform:translateY(0) rotateY(-4deg);} 50%{transform:translateY(-14px) rotateY(4deg);} }
+.car-glow-floor { position:absolute; bottom:-10px; left:50%; transform:translateX(-50%); width:75%; height:24px; background:radial-gradient(ellipse,rgba(0,245,255,0.35) 0%,transparent 70%); filter:blur(8px); animation:glowPulse 2.5s ease-in-out infinite; }
+@keyframes glowPulse { 0%,100%{opacity:0.5;transform:translateX(-50%) scaleX(1);} 50%{opacity:1;transform:translateX(-50%) scaleX(1.15);} }
+.laser-line { position:absolute; left:5%; right:5%; height:2px; background:linear-gradient(90deg,transparent,rgba(0,245,255,0.9),rgba(0,245,255,0.9),transparent); box-shadow:0 0 12px var(--cyan),0 0 24px rgba(0,245,255,0.4); animation:laserScan 3s ease-in-out infinite; top:25%; z-index:5; }
+@keyframes laserScan { 0%{top:18%;opacity:0;} 10%{opacity:1;} 90%{opacity:1;} 100%{top:82%;opacity:0;} }
+.droplets-wrap { position:absolute; inset:0; pointer-events:none; overflow:hidden; z-index:3; }
+.drop { position:absolute; width:2px; border-radius:2px; background:linear-gradient(180deg,rgba(0,245,255,0.75),transparent); animation:fall linear infinite; }
+@keyframes fall { 0%{transform:translateY(-15px);opacity:1;} 100%{transform:translateY(380px);opacity:0;} }
+.hud { position:absolute; background:rgba(3,6,18,0.8); border:1px solid rgba(0,245,255,0.25); padding:0.5rem 0.9rem; backdrop-filter:blur(6px); z-index:6; animation:hudBlink 3s ease-in-out infinite; }
+.hud::before,.hud::after { content:''; position:absolute; background:var(--cyan); }
+.hud::before { top:0; left:0; width:8px; height:1.5px; }
+.hud::after { top:0; left:0; width:1.5px; height:8px; }
+@keyframes hudBlink { 0%,100%{border-color:rgba(0,245,255,0.2);} 50%{border-color:rgba(0,245,255,0.6);} }
+.hud-v { font-family:'Orbitron',monospace; color:var(--cyan); font-size:1rem; font-weight:700; }
+.hud-l { color:rgba(255,255,255,0.4); font-size:0.58rem; text-transform:uppercase; letter-spacing:1px; }
+.hud-a { top:8%; right:-5%; }
+.hud-b { bottom:18%; left:-8%; }
+.hud-c { top:48%; right:-12%; }
+/* Slide promos */
+.promo-section { background:linear-gradient(180deg,var(--dark) 0%,rgba(0,30,60,0.15) 50%,var(--dark) 100%); }
+.promo-eyebrow { display:flex; align-items:center; gap:1rem; margin-bottom:0.8rem; }
+.promo-eyebrow::after { content:''; flex:1; height:1px; background:linear-gradient(90deg,rgba(0,245,255,0.3),transparent); }
+/* Features strip */
+.features-strip { background:rgba(0,85,221,0.05); border-top:1px solid var(--border); border-bottom:1px solid var(--border); }
+/* Unlimited section */
+.unlimited-section { position:relative; overflow:hidden; }
+.unlimited-section::before { content:''; position:absolute; inset:0; background:radial-gradient(ellipse at 60% 50%,rgba(0,85,221,0.1) 0%,transparent 70%); }
+.ul-inner { position:relative; z-index:1; display:grid; grid-template-columns:1fr 1fr; gap:5rem; align-items:center; }
+.ul-perks { list-style:none; margin:1.5rem 0 2rem; }
+.ul-perks li { padding:0.65rem 0; border-bottom:1px solid rgba(255,255,255,0.05); font-size:1rem; display:flex; align-items:center; gap:0.8rem; }
+.ul-perks li::before { content:'◈'; color:var(--cyan); font-size:0.7rem; }
+.ul-img { background:linear-gradient(135deg,rgba(0,85,221,0.12),rgba(0,245,255,0.04)); border:1px solid var(--border); display:flex; align-items:center; justify-content:center; min-height:360px; position:relative; overflow:hidden; }
+.ul-img-inner { text-align:center; padding:3rem; }
+.ul-icon-big { font-size:5rem; animation:bigFloat 4s ease-in-out infinite; }
+@keyframes bigFloat { 0%,100%{transform:translateY(0);} 50%{transform:translateY(-12px);} }
+.ul-img-lines { position:absolute; inset:0; background:repeating-linear-gradient(0deg,transparent,transparent 28px,rgba(0,245,255,0.03) 28px,rgba(0,245,255,0.03) 29px); pointer-events:none; }
+@media(max-width:900px) {
+  .hero-inner { grid-template-columns:1fr; text-align:center; }
+  .hero-eyebrow { justify-content:center; }
+  .hero-text p { max-width:100%; }
+  .hero-stats { justify-content:center; }
+  .hero-ctas { justify-content:center; }
+  .hero-car { max-width:480px; margin:0 auto; }
+  .hud-a,.hud-b,.hud-c { display:none; }
+  .ul-inner { grid-template-columns:1fr; }
+}
+</style>
+</head>
+<body>
+<div id="cursor"></div><div id="cursor-ring"></div>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-logo"><em>AURA</em>WASH</a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="washes.html" >Washes</a></li>
+    <li>
+      <span>AURA Unlimited® ▾</span>
+      <div class="dropdown">
+        <a href="memberships.html">Become a Member</a>
+        <a href="family-plan.html">Family Plan</a>
+        <a href="fleet.html">Fleet Accounts</a>
+      </div>
+    </li>
+    <li>
+      <span>Community ▾</span>
+      <div class="dropdown">
+        <a href="impact.html">Our Impact</a>
+        <a href="index.html#testimonials">Reviews</a>
+      </div>
+    </li>
+    <li>
+      <span>About ▾</span>
+      <div class="dropdown">
+        <a href="about.html">About Us</a>
+        <a href="locations.html">Locations</a>
+      </div>
+    </li>
+  </ul>
+  <div class="nav-right">
+    <a href="#" class="nav-signin">Sign In</a>
+    <a href="locations.html" class="nav-primary">Find Location</a>
+    <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg">
+    <div class="grid-bg"></div>
+    <div class="stars-wrap" id="stars"></div>
+    <div class="glow-orb orb1"></div>
+    <div class="glow-orb orb2"></div>
+  </div>
+  <div class="hero-inner">
+    <div class="hero-text">
+      <div class="hero-eyebrow">Next-Gen Car Care</div>
+      <h1>The Future of<span class="line2">Clean is Here.</span></h1>
+      <p>AI-powered wash technology meets precision engineering. Premium washes that protect your car's exterior and keep it looking fresh — rain or shine, every time.</p>
+      <div class="hero-stats">
+        <div class="hstat"><div class="v">500+</div><div class="l">Locations</div></div>
+        <div class="hstat"><div class="v">99.8%</div><div class="l">Clean Rating</div></div>
+        <div class="hstat"><div class="v">4.9★</div><div class="l">Avg Rating</div></div>
+      </div>
+      <div class="hero-ctas">
+        <a href="washes.html" class="btn-primary">⚡ View Washes</a>
+        <a href="memberships.html" class="btn-outline">Unlimited Plans</a>
+      </div>
+    </div>
+    <div class="hero-car">
+      <div class="car-wrap">
+        <div class="car-float">
+          <div class="laser-line"></div>
+          <div class="droplets-wrap" id="droplets"></div>
+          <div class="hud hud-a"><div class="hud-v">99.8%</div><div class="hud-l">Surface Clean</div></div>
+          <div class="hud hud-b"><div class="hud-v">4.2s</div><div class="hud-l">Cycle Time</div></div>
+          <div class="hud hud-c"><div class="hud-v">A.I.</div><div class="hud-l">Scan Active</div></div>
+          <svg viewBox="0 0 800 320" xmlns="http://www.w3.org/2000/svg" style="width:100%;filter:drop-shadow(0 20px 50px rgba(0,85,221,0.4))">
+            <defs>
+              <linearGradient id="bg" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#1a2a4a"/><stop offset="60%" stop-color="#0a1525"/><stop offset="100%" stop-color="#050c18"/></linearGradient>
+              <linearGradient id="glass" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="rgba(0,245,255,0.35)"/><stop offset="100%" stop-color="rgba(0,85,221,0.08)"/></linearGradient>
+              <filter id="glow"><feGaussianBlur stdDeviation="3" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+            </defs>
+            <ellipse cx="400" cy="296" rx="310" ry="16" fill="rgba(0,0,0,0.45)"/>
+            <rect x="82" y="212" width="636" height="58" rx="6" fill="url(#bg)"/>
+            <rect x="102" y="255" width="596" height="17" rx="3" fill="#060d1a"/>
+            <rect x="108" y="258" width="584" height="3" rx="1.5" fill="rgba(0,245,255,0.12)"/>
+            <path d="M162,216 L202,122 Q217,96 242,89 L422,76 Q462,73 492,86 L592,122 Q612,132 626,156 L660,216 Z" fill="url(#bg)"/>
+            <path d="M212,156 L242,96 L412,81 L492,96 L592,156 Z" fill="url(#glass)" opacity="0.88"/>
+            <path d="M242,150 L257,101 L352,85 Z" fill="rgba(255,255,255,0.07)"/>
+            <path d="M312,161 L322,101 L412,83 L412,166 Z" fill="url(#glass)" opacity="0.78"/>
+            <path d="M422,166 L422,83 L492,98 L502,166 Z" fill="url(#glass)" opacity="0.78"/>
+            <line x1="312" y1="89" x2="307" y2="216" stroke="rgba(0,245,255,0.18)" stroke-width="1.5"/>
+            <line x1="502" y1="98" x2="512" y2="216" stroke="rgba(0,245,255,0.18)" stroke-width="1.5"/>
+            <rect x="297" y="186" width="22" height="5" rx="2.5" fill="rgba(0,245,255,0.28)"/>
+            <rect x="490" y="186" width="22" height="5" rx="2.5" fill="rgba(0,245,255,0.28)"/>
+            <path d="M642,216 L722,226 Q742,229 746,241 L741,266 Q736,271 702,273 L642,271 Z" fill="#07101e"/>
+            <path d="M82,216 L62,226 Q42,229 37,241 L42,266 Q47,271 82,273 L142,271 Z" fill="#07101e"/>
+            <rect x="660" y="229" width="58" height="17" rx="3" fill="rgba(0,245,255,0.28)" filter="url(#glow)"/>
+            <rect x="658" y="225" width="62" height="4" rx="2" fill="rgba(0,245,255,0.85)" filter="url(#glow)"/>
+            <rect x="84" y="229" width="50" height="17" rx="3" fill="rgba(255,60,60,0.45)" filter="url(#glow)"/>
+            <rect x="82" y="225" width="54" height="4" rx="2" fill="rgba(255,50,50,0.7)" filter="url(#glow)"/>
+            <rect x="240" y="74" width="288" height="5" rx="2.5" fill="#182438"/>
+            <path d="M622,146 L642,141 L640,159 L620,161 Z" fill="#0a1525" stroke="rgba(0,245,255,0.12)" stroke-width="1"/>
+            <line x1="412" y1="73" x2="416" y2="41" stroke="rgba(0,245,255,0.38)" stroke-width="1.5"/>
+            <circle cx="416" cy="39" r="3" fill="var(--cyan)" filter="url(#glow)"/>
+            <!-- Front wheel -->
+            <circle cx="582" cy="273" r="46" fill="#080c18" stroke="rgba(0,245,255,0.12)" stroke-width="2"/>
+            <circle cx="582" cy="273" r="35" fill="#060a14"/>
+            <g filter="url(#glow)"><line x1="582" y1="240" x2="582" y2="306" stroke="rgba(0,245,255,0.5)" stroke-width="2"/><line x1="549" y1="273" x2="615" y2="273" stroke="rgba(0,245,255,0.5)" stroke-width="2"/><line x1="558" y1="249" x2="606" y2="297" stroke="rgba(0,245,255,0.28)" stroke-width="1.5"/><line x1="606" y1="249" x2="558" y2="297" stroke="rgba(0,245,255,0.28)" stroke-width="1.5"/></g>
+            <circle cx="582" cy="273" r="9" fill="rgba(0,245,255,0.18)" stroke="rgba(0,245,255,0.5)" stroke-width="1.5"/>
+            <circle cx="582" cy="273" r="4" fill="rgba(0,245,255,0.9)"/>
+            <circle cx="582" cy="273" r="46" fill="none" stroke="#18202e" stroke-width="9"/>
+            <!-- Rear wheel -->
+            <circle cx="212" cy="273" r="46" fill="#080c18" stroke="rgba(0,245,255,0.12)" stroke-width="2"/>
+            <circle cx="212" cy="273" r="35" fill="#060a14"/>
+            <g filter="url(#glow)"><line x1="212" y1="240" x2="212" y2="306" stroke="rgba(0,245,255,0.5)" stroke-width="2"/><line x1="179" y1="273" x2="245" y2="273" stroke="rgba(0,245,255,0.5)" stroke-width="2"/><line x1="188" y1="249" x2="236" y2="297" stroke="rgba(0,245,255,0.28)" stroke-width="1.5"/><line x1="236" y1="249" x2="188" y2="297" stroke="rgba(0,245,255,0.28)" stroke-width="1.5"/></g>
+            <circle cx="212" cy="273" r="9" fill="rgba(0,245,255,0.18)" stroke="rgba(0,245,255,0.5)" stroke-width="1.5"/>
+            <circle cx="212" cy="273" r="4" fill="rgba(0,245,255,0.9)"/>
+            <circle cx="212" cy="273" r="46" fill="none" stroke="#18202e" stroke-width="9"/>
+          </svg>
+        </div>
+        <div class="car-glow-floor"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker-bar">
+  <div class="ticker-inner">
+    <span class="ticker-item">🚗 1,247 cars washed today</span>
+    <span class="ticker-item">⭐ 4.9 avg rating on Google</span>
+    <span class="ticker-item">💧 2.1M gallons saved with eco-tech</span>
+    <span class="ticker-item">🏆 Newsweek America's Best 2025</span>
+    <span class="ticker-item">⚡ AI-Powered Precision Wash</span>
+    <span class="ticker-item">🔒 Members Save Up to 60%</span>
+    <span class="ticker-item">📍 500+ Locations Nationwide</span>
+    <span class="ticker-item">🚗 1,247 cars washed today</span>
+    <span class="ticker-item">⭐ 4.9 avg rating on Google</span>
+    <span class="ticker-item">💧 2.1M gallons saved with eco-tech</span>
+    <span class="ticker-item">🏆 Newsweek America's Best 2025</span>
+    <span class="ticker-item">⚡ AI-Powered Precision Wash</span>
+    <span class="ticker-item">🔒 Members Save Up to 60%</span>
+    <span class="ticker-item">📍 500+ Locations Nationwide</span>
+  </div>
+</div>
+
+<!-- OFFERS & PROMOS -->
+<section class="section promo-section">
+  <div class="container">
+    <div class="reveal">
+      <div class="promo-eyebrow"><span class="section-label">Offers & Promos</span></div>
+      <h2 class="section-title">Current <span>Deals</span></h2>
+      <p class="section-sub">Limited-time offers, exclusive partnerships, and member perks designed to keep you clean for less.</p>
+    </div>
+    <div class="promo-grid">
+      <div class="promo-card reveal">
+        <span class="tag">Partnership</span>
+        <h3>AAA Members Save 25%</h3>
+        <p>Add your AAA Membership number at checkout to receive 25% off single washes at any AURA location.*</p>
+        <a href="aaa-discount.html" class="btn-outline">Learn More →</a>
+      </div>
+      <div class="promo-card reveal">
+        <span class="tag">Mobile App</span>
+        <h3>Get Our Best Wash FREE</h3>
+        <p>Download and sign up in the AURA mobile app and receive a complimentary Premier wash on us.*</p>
+        <a href="#" class="btn-primary">Download App →</a>
+      </div>
+      <div class="promo-card reveal">
+        <span class="tag">Membership</span>
+        <h3>Ride Clean All Month</h3>
+        <p>Shine all month long with daily unlimited washes, special perks, and exclusive member-only discounts.</p>
+        <a href="memberships.html" class="btn-outline">Become a Member →</a>
+      </div>
+      <div class="promo-card reveal">
+        <span class="tag">Family Plan</span>
+        <h3>Big Savings, Multiple Cars</h3>
+        <p>Add more vehicles to your plan and save up to 40% per additional car, every single month.</p>
+        <a href="family-plan.html" class="btn-outline">Family Plan →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BENEFITS -->
+<section class="section features-strip">
+  <div class="container">
+    <div class="reveal" style="text-align:center;margin-bottom:1rem;">
+      <span class="section-label" style="display:block;text-align:center;">More Than Just a Wash</span>
+      <h2 class="section-title" style="text-align:center;">Care for Your <span>Car</span></h2>
+    </div>
+    <div class="benefits-grid">
+      <div class="benefit-item reveal">
+        <div class="benefit-icon">✨</div>
+        <h3>Shiny & Clean</h3>
+        <p>Removes dirt, grime, and road salt while leaving your car sparkling clean with a mirror finish.</p>
+      </div>
+      <div class="benefit-item reveal">
+        <div class="benefit-icon">⚡</div>
+        <h3>Quick & Convenient</h3>
+        <p>Get a superior wash in minutes with our express tunnels. In and out before you know it.</p>
+      </div>
+      <div class="benefit-item reveal">
+        <div class="benefit-icon">🛡️</div>
+        <h3>Surface Protection</h3>
+        <p>Premium waxes and sealants that create a surface shield from rainwater, dirt, UV, and grime.</p>
+      </div>
+      <div class="benefit-item reveal">
+        <div class="benefit-icon">🌀</div>
+        <h3>Sparkling Extras</h3>
+        <p>Complimentary turbo vacs and interior surface cleaner included with every single wash.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- UNLIMITED SECTION -->
+<section class="section unlimited-section">
+  <div class="container">
+    <div class="ul-inner">
+      <div class="reveal">
+        <span class="section-label">AURA Unlimited®</span>
+        <h2 class="section-title">Daily Washes.<br><span>Zero Limits.</span></h2>
+        <p class="section-sub">Join the AURA Unlimited® Wash Club and wash as often as you want — rain or shine. Live fast. Wash often.</p>
+        <ul class="ul-perks">
+          <li>Unlimited washes at any AURA location</li>
+          <li>Dedicated members-only express lane</li>
+          <li>Exclusive member perks & rewards</li>
+          <li>No contract, cancel anytime</li>
+          <li>Family plan available — add multiple vehicles</li>
+        </ul>
+        <a href="memberships.html" class="btn-primary">Sign Up Now →</a>
+      </div>
+      <div class="ul-img reveal">
+        <div class="ul-img-lines"></div>
+        <div class="ul-img-inner">
+          <div class="ul-icon-big">🚗</div>
+          <div style="margin-top:1.5rem;">
+            <div style="font-family:'Orbitron',monospace;font-size:0.6rem;letter-spacing:3px;color:var(--cyan);margin-bottom:0.5rem;">MEMBERSHIP ACTIVE</div>
+            <div style="font-family:'Orbitron',monospace;font-size:2rem;font-weight:900;color:white;">UNLIMITED</div>
+            <div style="font-size:0.85rem;color:var(--text);margin-top:0.5rem;">Wash anytime · Any location</div>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:2rem;">
+            <div style="background:rgba(0,245,255,0.05);border:1px solid rgba(0,245,255,0.15);padding:1rem;text-align:center;">
+              <div style="font-family:'Orbitron',monospace;font-size:1.5rem;font-weight:900;color:var(--cyan);">∞</div>
+              <div style="font-size:0.7rem;color:var(--text);">Washes/mo</div>
+            </div>
+            <div style="background:rgba(0,245,255,0.05);border:1px solid rgba(0,245,255,0.15);padding:1rem;text-align:center;">
+              <div style="font-family:'Orbitron',monospace;font-size:1.5rem;font-weight:900;color:var(--cyan);">500+</div>
+              <div style="font-size:0.7rem;color:var(--text);">Locations</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY CHOOSE AURA -->
+<section class="section" style="background:rgba(0,20,50,0.1);border-top:1px solid var(--border);">
+  <div class="container">
+    <div class="reveal" style="text-align:center;margin-bottom:3rem;">
+      <span class="section-label">Why Choose Us</span>
+      <h2 class="section-title">AURA WASH <span>Advantage</span></h2>
+    </div>
+    <div class="benefits-grid">
+      <div class="benefit-item reveal">
+        <div class="benefit-icon">⚡</div>
+        <h3>Advanced Technology</h3>
+        <p>AI-powered systems deliver spotless results faster than traditional wash. Precision-engineered for every vehicle.</p>
+      </div>
+      <div class="benefit-item reveal">
+        <div class="benefit-icon">💰</div>
+        <h3>Affordable & Flexible</h3>
+        <p>No long contracts. Cancel anytime. Plans from ₦22,800/month with 20% savings on yearly commitments.</p>
+      </div>
+      <div class="benefit-item reveal">
+        <div class="benefit-icon">🏪</div>
+        <h3>Nationwide Locations</h3>
+        <p>Use your membership at any AURA WASH location across Nigeria. Same service, same excellence everywhere.</p>
+      </div>
+      <div class="benefit-item reveal">
+        <div class="benefit-icon">🎁</div>
+        <h3>Rewards Program</h3>
+        <p>Earn points on every wash and purchase. Redeem for free washes, upgrades, and exclusive merchandise.</p>
+      </div>
+      <div class="benefit-item reveal">
+        <div class="benefit-icon">👥</div>
+        <h3>Family Plans</h3>
+        <p>Add multiple vehicles to one membership and save up to 40% per car. Perfect for busy households.</p>
+      </div>
+      <div class="benefit-item reveal">
+        <div class="benefit-icon">🔒</div>
+        <h3>No Damage Guarantee</h3>
+        <p>Our systems are engineered to be gentle on all vehicle types. Peace of mind with every wash.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AWARDS -->
+<section class="section-sm" style="border-top:1px solid var(--border);">
+  <div class="container reveal">
+    <div style="display:flex;align-items:center;gap:3rem;flex-wrap:wrap;justify-content:center;">
+      <div>
+        <span class="section-label">Awards & Recognition</span>
+        <h2 class="section-title" style="margin-bottom:0;">Recognized <span>Nationwide</span></h2>
+      </div>
+      <div class="awards-row">
+        <div class="award-badge"><div class="year">2025</div><span class="label">Newsweek Best of the Best</span></div>
+        <div class="award-badge"><div class="year">15K+</div><span class="label">Happy Members Nationwide</span></div>
+        <div class="award-badge"><div class="year">#1</div><span class="label">Rated Express Car Wash</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="section" id="testimonials" style="border-top:1px solid var(--border);">
+  <div class="container">
+    <div class="reveal" style="text-align:center;margin-bottom:3rem;">
+      <span class="section-label">What Customers Love</span>
+      <h2 class="section-title" style="text-align:center;">Real <span>Reviews</span></h2>
+    </div>
+    <div class="testi-track">
+      <div class="testi-card reveal">
+        <div class="testi-header"><div class="testi-avatar">DC</div><div class="testi-meta"><div class="name">Daniel C.</div><div class="loc">Bluffton, SC</div></div></div>
+        <div class="stars">★★★★★</div>
+        <p class="testi-text">"The facility is well maintained, organized, clean and the staff is extremely friendly, professional — you see the same friendly faces on each visit. Clearly run by competent professionals."</p>
+        <div class="testi-platform">Posted on Google · July 2025</div>
+      </div>
+      <div class="testi-card reveal">
+        <div class="testi-header"><div class="testi-avatar">PG</div><div class="testi-meta"><div class="name">Peyton G.</div><div class="loc">Dallas, TX</div></div></div>
+        <div class="stars">★★★★★</div>
+        <p class="testi-text">"Super easy and quick! My car was so dirty and it looks amazing now. Staff was really nice and made sure everything went smoothly. Definitely coming back!"</p>
+        <div class="testi-platform">Posted on Google · November 2025</div>
+      </div>
+      <div class="testi-card reveal">
+        <div class="testi-header"><div class="testi-avatar">LN</div><div class="testi-meta"><div class="name">Lacy N.</div><div class="loc">Knoxville, TN</div></div></div>
+        <div class="stars">★★★★★</div>
+        <p class="testi-text">"The staff are so friendly and helpful. Greeted with a smile by everyone. Jake assisted with cleaning floor mats and gave us air fresheners. They go above and beyond!"</p>
+        <div class="testi-platform">Posted on Google · November 2025</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LOCATION CTA -->
+<section class="section-sm" style="border-top:1px solid var(--border);">
+  <div class="container">
+    <div class="location-bar reveal">
+      <div><h3>Find Your Nearest AURA</h3><p>500+ locations across the country. One is closer than you think.</p></div>
+      <div class="location-form">
+        <input type="text" placeholder="Enter ZIP code or city...">
+        <button>Find →</button>
+      </div>
+      <a href="locations.html" class="btn-primary">View All →</a>
+    </div>
+  </div>
+</section>
+
+<!-- NEWSLETTER -->
+<section class="section-sm" style="border-top:1px solid var(--border);">
+  <div class="container">
+    <div class="newsletter reveal">
+      <h2>Stay In The Know</h2>
+      <p>Get the latest updates, promos, and car care tips straight to your inbox.</p>
+      <div class="nl-form">
+        <input type="email" placeholder="Enter your email address...">
+        <button>Subscribe →</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <div class="logo"><em>AURA</em>WASH</div>
+      <span class="tagline">ZIP IN. ZIP OUT. SHINE ON.®</span>
+      <p>The most advanced express car wash experience, powered by AI and built for perfection. Premium results, every visit.</p>
+      <div class="social-row">
+        <a href="#" class="social-btn">f</a>
+        <a href="#" class="social-btn">𝕏</a>
+        <a href="#" class="social-btn">📸</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Washes</h4>
+      <a href="washes.html">Basic Wash</a>
+      <a href="washes.html">Deluxe Wash</a>
+      <a href="washes.html">Premium Wash</a>
+      <a href="washes.html">Premier Wash</a>
+    </div>
+    <div class="footer-col">
+      <h4>Membership</h4>
+      <a href="memberships.html">Become a Member</a>
+      <a href="family-plan.html">Family Plan</a>
+      <a href="fleet.html">Fleet Accounts</a>
+      <a href="gift-cards.html">Gift Cards</a>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <a href="about.html">About Us</a>
+      <a href="impact.html">Our Impact</a>
+      <a href="locations.html">Locations</a>
+      <a href="careers.html">Careers</a>
+      <a href="contact.html">Contact Us</a>
+    </div>
+  </div>
+  <div style="border-top:1px solid var(--border);padding:0 5%;max-width:1280px;margin:0 auto;">
+    <div class="footer-bottom">
+      <p>© 2026 AURA WASH. All Rights Reserved.</p>
+      <div class="legal">
+        <a href="#">Terms of Service</a>
+        <a href="#">Privacy Policy</a>
+        <a href="#">Safety</a>
+        <a href="#">Cookie Preferences</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="main.js"></script>
+<script>
+// Stars
+(function(){const c=document.getElementById('stars');for(let i=0;i<70;i++){const s=document.createElement('div');const sz=Math.random()*1.8+0.8;s.style.cssText=`position:absolute;width:${sz}px;height:${sz}px;background:white;border-radius:50%;left:${Math.random()*100}%;top:${Math.random()*100}%;animation:twinkle ${2+Math.random()*3}s ease-in-out infinite;animation-delay:${Math.random()*3}s;`;c.appendChild(s);}})();
+// Droplets
+(function(){const c=document.getElementById('droplets');function mk(){const d=document.createElement('div');d.className='drop';const h=8+Math.random()*18;d.style.cssText=`left:${Math.random()*100}%;height:${h}px;animation-duration:${0.7+Math.random()*0.7}s;animation-delay:${Math.random()*2}s;`;c.appendChild(d);setTimeout(()=>d.remove(),2200);}setInterval(mk,90);})();
+</script>
+<style>@keyframes twinkle{0%,100%{opacity:0.15;}50%{opacity:0.9;}}</style>
+</body>
+</html>

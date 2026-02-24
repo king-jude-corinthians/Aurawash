@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Locations — AURA WASH</title>
+<link rel="stylesheet" href="style.css">
+<style>
+.state-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:1.2rem; }
+.state-block { background:rgba(10,10,22,0.7); border:1px solid var(--border); padding:1.5rem; transition:all 0.3s; }
+.state-block:hover { border-color:rgba(0,245,255,0.3); }
+.state-name { font-family:'Orbitron',monospace; font-size:0.75rem; font-weight:700; color:var(--cyan); letter-spacing:2px; text-transform:uppercase; margin-bottom:0.8rem; display:flex; align-items:center; gap:0.5rem; }
+.state-name::after { content:''; flex:1; height:1px; background:rgba(0,245,255,0.15); }
+.location-list { list-style:none; }
+.location-list li { font-size:0.82rem; color:var(--text); padding:0.3rem 0; border-bottom:1px solid rgba(255,255,255,0.03); display:flex; align-items:center; gap:0.4rem; }
+.location-list li::before { content:'📍'; font-size:0.65rem; }
+.loc-search-bar { background:rgba(0,85,221,0.06); border:1px solid var(--border); padding:2.5rem 3rem; margin-bottom:4rem; display:flex; align-items:center; justify-content:space-between; gap:2rem; flex-wrap:wrap; }
+.loc-search-bar h3 { font-family:'Orbitron',monospace; font-size:1rem; color:white; margin-bottom:0.4rem; }
+.loc-search-bar p { font-size:0.88rem; color:var(--text); }
+.loc-form { display:flex; gap:0; flex:1; max-width:480px; }
+.loc-form input { flex:1; background:rgba(0,0,0,0.5); border:1px solid rgba(0,245,255,0.2); border-right:none; color:white; padding:0.85rem 1.2rem; font-family:'Rajdhani',sans-serif; font-size:0.95rem; outline:none; }
+.loc-form input:focus { border-color:rgba(0,245,255,0.5); }
+.loc-form button { background:var(--cyan); border:none; color:var(--dark); padding:0.85rem 1.6rem; font-family:'Orbitron',monospace; font-size:0.65rem; letter-spacing:2px; cursor:none; font-weight:700; }
+.filter-row { display:flex; gap:0.8rem; flex-wrap:wrap; margin-bottom:2.5rem; }
+.filter-btn { background:rgba(0,0,0,0.3); border:1px solid rgba(0,245,255,0.15); color:var(--text); font-size:0.78rem; letter-spacing:1px; padding:0.4rem 1rem; cursor:none; text-transform:uppercase; font-family:'Orbitron',monospace; transition:all 0.25s; }
+.filter-btn.active,.filter-btn:hover { border-color:var(--cyan); color:var(--cyan); background:rgba(0,245,255,0.05); }
+</style>
+</head>
+<body>
+<div id="cursor"></div><div id="cursor-ring"></div>
+<nav>
+  <a href="index.html" class="nav-logo"><em>AURA</em>WASH</a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="washes.html">Washes</a></li>
+    <li><span>AURA Unlimited® ▾</span><div class="dropdown"><a href="memberships.html">Become a Member</a><a href="family-plan.html">Family Plan</a><a href="fleet.html">Fleet Accounts</a></div></li>
+    <li><span>Community ▾</span><div class="dropdown"><a href="impact.html">Our Impact</a><a href="index.html#testimonials">Reviews</a></div></li>
+    <li><span>About ▾</span><div class="dropdown"><a href="about.html">About Us</a><a href="locations.html" class="active">Locations</a></div></li>
+  </ul>
+  <div class="nav-right"><a href="#" class="nav-signin">Sign In</a><a href="locations.html" class="nav-primary">Find Location</a><div class="hamburger" id="hamburger"><span></span><span></span><span></span></div></div>
+</nav>
+
+<div class="page-hero">
+  <div class="page-hero-bg"></div><div class="grid-bg"></div>
+    <div class="page-hero-content">
+    <span class="page-tag">Find Us</span>
+    <h1>Our <span>Locations</span></h1>
+    <p>Locations across Nigeria. Find the nearest AURA WASH to you.</p>
+  </div>
+</div>
+
+<section class="section">
+  <div class="container">
+    <div class="loc-search-bar reveal">
+      <div><h3>Find Your Nearest AURA WASH</h3><p>Enter your city or state to find locations near you.</p></div>
+      <div class="loc-form">
+        <input type="text" placeholder="ZIP code or city...">
+        <button>Search →</button>
+      </div>
+    </div>
+
+    <div class="filter-row reveal">
+      <button class="filter-btn active">All States</button>
+      <button class="filter-btn">Lagos</button>
+      <button class="filter-btn">FCT</button>
+      <button class="filter-btn">Rivers</button>
+      <button class="filter-btn">Oyo</button>
+      <button class="filter-btn">Kano</button>
+      <button class="filter-btn">Kaduna</button>
+    </div>
+
+    <div class="state-grid">
+      <div class="state-block reveal">
+        <div class="state-name">Lagos</div>
+        <ul class="location-list">
+          <li>Ikeja — Alausa Rd</li>
+          <li>Lekki — Admiralty Way</li>
+          <li>Victoria Island — Ozumba Mbadiwe</li>
+          <li>Surulere — Isaac John St</li>
+          <li>Agege — Lagos-Abeokuta Rd</li>
+        </ul>
+      </div>
+      <div class="state-block reveal">
+        <div class="state-name">FCT</div>
+        <ul class="location-list">
+          <li>Garki — Ahmadu Bello Way</li>
+          <li>Wuse — Herbert Macaulay Rd</li>
+          <li>Asokoro — Unity Fountain</li>
+        </ul>
+      </div>
+      <div class="state-block reveal">
+        <div class="state-name">Rivers</div>
+        <ul class="location-list">
+          <li>Port Harcourt — GRA Phase 2</li>
+          <li>Port Harcourt — Rumuokoro Rd</li>
+          <li>Obio-Akpor — Trans-Amadi</li>
+        </ul>
+      </div>
+      <div class="state-block reveal">
+        <div class="state-name">Oyo</div>
+        <ul class="location-list">
+          <li>Ibadan — Ring Road</li>
+          <li>Ibadan — Bodija</li>
+          <li>Ibadan — Orita Merin</li>
+        </ul>
+      </div>
+      <div class="state-block reveal">
+        <div class="state-name">Kano</div>
+        <ul class="location-list">
+          <li>Kano — Nassarawa Rd</li>
+          <li>Kano — Fagge</li>
+        </ul>
+      </div>
+      <div class="state-block reveal">
+        <div class="state-name">Kaduna</div>
+        <ul class="location-list">
+          <li>Kaduna — Barnawa</li>
+          <li>Kaduna — Ahmadu Bello Way</li>
+        </ul>
+      </div>
+      <div class="state-block reveal">
+        <div class="state-name">Anambra</div>
+        <ul class="location-list">
+          <li>Onitsha — Upper Iweka</li>
+          <li>Awka — Zik Ave</li>
+        </ul>
+      </div>
+      <div class="state-block reveal">
+        <div class="state-name">Enugu</div>
+        <ul class="location-list">
+          <li>Enugu — Independence Layout</li>
+        </ul>
+      </div>
+      <div class="state-block reveal">
+        <div class="state-name">Ogun</div>
+        <ul class="location-list">
+          <li>Abeokuta — Sapon Rd</li>
+          <li>Sagamu — Ikenne Rd</li>
+        </ul>
+      </div>
+      <div class="state-block reveal">
+        <div class="state-name">Delta</div>
+        <ul class="location-list">
+          <li>Warri — Effurun Rd</li>
+          <li>Ughelli — Oghara Rd</li>
+        </ul>
+      </div>
+      <div class="state-block reveal">
+        <div class="state-name">Akwa Ibom</div>
+        <ul class="location-list">
+          <li>Uyo — Oron Rd</li>
+        </ul>
+      </div>
+    </div>
+
+    <div style="text-align:center;margin-top:3rem;padding:2rem;background:rgba(0,85,221,0.06);border:1px solid var(--border);" class="reveal">
+      <div style="font-family:'Orbitron',monospace;font-size:0.65rem;letter-spacing:3px;color:var(--cyan);margin-bottom:0.8rem;">GROWING FAST</div>
+      <h3 style="font-family:'Orbitron',monospace;font-size:1.1rem;color:white;margin-bottom:0.5rem;">New Locations Opening Soon</h3>
+      <p style="font-size:0.9rem;color:var(--text);">AURA WASH is expanding. Check back often or sign up for our newsletter to hear about new openings near you.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand"><div class="logo"><em>AURA</em>WASH</div><span class="tagline">ZIP IN. ZIP OUT. SHINE ON.®</span><p>Advanced express car wash technology powered by AI.</p><div class="social-row"><a href="#" class="social-btn">f</a><a href="#" class="social-btn">𝕏</a><a href="#" class="social-btn">📸</a></div></div>
+    <div class="footer-col"><h4>Washes</h4><a href="washes.html">Basic Wash</a><a href="washes.html">Premium Wash</a><a href="washes.html">Premier Wash</a></div>
+    <div class="footer-col"><h4>Membership</h4><a href="memberships.html">Become a Member</a><a href="family-plan.html">Family Plan</a><a href="fleet.html">Fleet Accounts</a></div>
+    <div class="footer-col"><h4>Company</h4><a href="about.html">About Us</a><a href="impact.html">Our Impact</a><a href="locations.html">Locations</a></div>
+  </div>
+  <div style="border-top:1px solid var(--border);padding:0 5%;max-width:1280px;margin:0 auto;"><div class="footer-bottom"><p>© 2026 AURA WASH. All Rights Reserved.</p><div class="legal"><a href="#">Terms of Service</a><a href="#">Privacy Policy</a></div></div></div>
+</footer>
+<script src="main.js"></script>
+<script>
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', function() {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    this.classList.add('active');
+  });
+});
+</script>
+</body>
+</html>

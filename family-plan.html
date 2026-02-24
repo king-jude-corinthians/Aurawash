@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Family Plan — AURA WASH</title>
+<link rel="stylesheet" href="style.css">
+<style>
+.savings-table { width:100%; border-collapse:collapse; }
+.savings-table th { font-family:'Orbitron',monospace; font-size:0.62rem; letter-spacing:2px; color:var(--cyan); text-transform:uppercase; padding:1rem 1.5rem; text-align:left; border-bottom:2px solid rgba(0,245,255,0.2); }
+.savings-table td { padding:1rem 1.5rem; font-size:0.92rem; border-bottom:1px solid rgba(255,255,255,0.04); }
+.savings-table tr:hover td { background:rgba(0,245,255,0.02); }
+.savings-table .green { color:#00e676; font-weight:700; font-family:'Orbitron',monospace; }
+.how-steps { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:2rem; margin-top:2rem; }
+.how-step { background:rgba(10,10,22,0.7); border:1px solid var(--border); padding:2rem; text-align:center; position:relative; }
+.how-step .num { font-family:'Orbitron',monospace; font-size:2.5rem; font-weight:900; color:rgba(0,245,255,0.1); margin-bottom:0.8rem; }
+.how-step h3 { font-family:'Orbitron',monospace; font-size:0.82rem; color:white; margin-bottom:0.6rem; }
+.how-step p { font-size:0.88rem; color:var(--text); line-height:1.6; }
+</style>
+</head>
+<body>
+<div id="cursor"></div><div id="cursor-ring"></div>
+<nav>
+  <a href="index.html" class="nav-logo"><em>AURA</em>WASH</a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="washes.html">Washes</a></li>
+    <li><span>AURA Unlimited® ▾</span><div class="dropdown"><a href="memberships.html">Become a Member</a><a href="family-plan.html" class="active">Family Plan</a><a href="fleet.html">Fleet Accounts</a></div></li>
+    <li><span>Community ▾</span><div class="dropdown"><a href="impact.html">Our Impact</a><a href="index.html#testimonials">Reviews</a></div></li>
+    <li><span>About ▾</span><div class="dropdown"><a href="about.html">About Us</a><a href="locations.html">Locations</a></div></li>
+  </ul>
+  <div class="nav-right"><a href="#" class="nav-signin">Sign In</a><a href="locations.html" class="nav-primary">Find Location</a><div class="hamburger" id="hamburger"><span></span><span></span><span></span></div></div>
+</nav>
+
+<div class="page-hero">
+  <div class="page-hero-bg"></div><div class="grid-bg"></div>
+  <div class="page-hero-content">
+    <span class="page-tag">Family Plan</span>
+    <h1>Big Savings for <span>Multiple Cars</span></h1>
+    <p>Add more vehicles to your AURA Unlimited® membership and save up to 40% per additional car, every single month.</p>
+  </div>
+</div>
+
+<section class="section">
+  <div class="container">
+    <div class="split reveal">
+      <div>
+        <span class="section-label">How It Works</span>
+        <h2 class="section-title">One Plan, <span>Many Cars</span></h2>
+        <p style="font-size:1rem;color:var(--text);line-height:1.75;margin-bottom:1.5rem;">The AURA Family Plan lets you link multiple vehicles to a single account. Each additional car gets a discounted membership rate, making it the smartest way to keep the whole household clean.</p>
+        <ul class="ul-perks">
+          <li>Primary vehicle pays standard membership rate</li>
+          <li>Each additional vehicle saves up to 40%</li>
+          <li>Manage all vehicles from one app account</li>
+          <li>Each vehicle gets its own priority lane access</li>
+          <li>Available on Pro Pass and Elite Pass plans</li>
+        </ul>
+        <a href="memberships.html" class="btn-primary">Start Your Plan →</a>
+      </div>
+      <div class="fam-grid reveal" style="margin:0;">
+        <div class="fam-card"><div class="fam-vehicle">🚗</div><div class="fam-num">Full Price</div><div class="fam-label">Vehicle 1 (Primary)</div></div>
+        <div class="fam-card"><div class="fam-vehicle">🚙</div><div class="fam-num">-20%</div><div class="fam-label">Vehicle 2</div></div>
+        <div class="fam-card"><div class="fam-vehicle">🚐</div><div class="fam-num">-30%</div><div class="fam-label">Vehicle 3</div></div>
+        <div class="fam-card"><div class="fam-vehicle">🚕</div><div class="fam-num">-40%</div><div class="fam-label">Vehicle 4+</div></div>
+      </div>
+    </div>
+
+    <div style="margin-top:5rem;" class="reveal">
+      <h2 class="section-title" style="margin-bottom:2rem;">Savings <span>Breakdown</span></h2>
+      <div style="overflow-x:auto;">
+        <table class="savings-table">
+          <thead><tr><th>Vehicles</th><th>Pro Pass/mo</th><th>Monthly Total</th><th>You Save</th></tr></thead>
+          <tbody>
+            <tr><td>1 Vehicle</td><td>$39/each</td><td>$39</td><td class="green">—</td></tr>
+            <tr><td>2 Vehicles</td><td>$39 + $31</td><td>$70</td><td class="green">Save $8/mo</td></tr>
+            <tr><td>3 Vehicles</td><td>$39 + $31 + $27</td><td>$97</td><td class="green">Save $20/mo</td></tr>
+            <tr><td>4 Vehicles</td><td>$39 + $31 + $27 + $23</td><td>$120</td><td class="green">Save $36/mo</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div style="margin-top:5rem;" class="reveal">
+      <h2 class="section-title" style="margin-bottom:0.5rem;">How to <span>Get Started</span></h2>
+      <p class="section-sub">Three simple steps to cleaner cars across the whole family.</p>
+      <div class="how-steps">
+        <div class="how-step"><div class="num">01</div><h3>Sign Up</h3><p>Create or log in to your AURA WASH account and choose your base membership plan.</p></div>
+        <div class="how-step"><div class="num">02</div><h3>Add Vehicles</h3><p>In the app, navigate to Family Plan and add your additional vehicle license plates.</p></div>
+        <div class="how-step"><div class="num">03</div><h3>Start Washing</h3><p>Each vehicle is recognized automatically at the sensor gate. Everyone washes, you save.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="border-top:1px solid var(--border);">
+  <div class="container">
+    <div style="background:linear-gradient(135deg,rgba(0,85,221,0.1),rgba(0,245,255,0.03));border:1px solid var(--border);padding:4rem;text-align:center;" class="reveal">
+      <span class="section-label">Ready to Save?</span>
+      <h2 class="section-title" style="text-align:center;">Start Your <span>Family Plan</span></h2>
+      <p style="font-size:1rem;color:var(--text);max-width:500px;margin:0 auto 2.5rem;line-height:1.75;">Join thousands of families already saving with AURA Unlimited®. Get your first vehicle on a Pro or Elite Pass, then add more at a discount.</p>
+      <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
+        <a href="memberships.html" class="btn-primary">View Membership Plans →</a>
+        <a href="locations.html" class="btn-outline">Find a Location</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand"><div class="logo"><em>AURA</em>WASH</div><span class="tagline">ZIP IN. ZIP OUT. SHINE ON.®</span><p>Advanced express car wash technology powered by AI.</p><div class="social-row"><a href="#" class="social-btn">f</a><a href="#" class="social-btn">𝕏</a><a href="#" class="social-btn">📸</a></div></div>
+    <div class="footer-col"><h4>Washes</h4><a href="washes.html">Basic Wash</a><a href="washes.html">Deluxe Wash</a><a href="washes.html">Premium Wash</a><a href="washes.html">Premier Wash</a></div>
+    <div class="footer-col"><h4>Membership</h4><a href="memberships.html">Become a Member</a><a href="family-plan.html">Family Plan</a><a href="fleet.html">Fleet Accounts</a><a href="#">Gift Cards</a></div>
+    <div class="footer-col"><h4>Company</h4><a href="about.html">About Us</a><a href="impact.html">Our Impact</a><a href="locations.html">Locations</a><a href="#">Careers</a></div>
+  </div>
+  <div style="border-top:1px solid var(--border);padding:0 5%;max-width:1280px;margin:0 auto;"><div class="footer-bottom"><p>© 2026 AURA WASH. All Rights Reserved.</p><div class="legal"><a href="#">Terms of Service</a><a href="#">Privacy Policy</a><a href="#">Safety</a></div></div></div>
+</footer>
+<script src="main.js"></script>
+</body>
+</html>
