@@ -113,7 +113,17 @@ document.querySelectorAll('.wash-card,.plan-card,.promo-card').forEach(card => {
 
 // Auth & Subscribe with Backend Integration
 (function() {
-  const API = 'http://localhost:3000';
+  // API base: prefer window.__API_BASE__ (set by hosting), else use localhost for dev,
+  // otherwise use relative paths so deployed frontend talks to same origin.
+  // If opening files directly (file:), assume local backend on port 3000.
+  const isLocalFile = location.protocol === 'file:';
+  const isLocalHost = location.hostname === 'localhost' || location.hostname === '127.0.0.1';
+  const API = (window.__API_BASE__ || (isLocalFile || isLocalHost ? 'http://localhost:3000' : '')).replace(/\/$/, '');
+
+  function api(path) {
+    const p = path.startsWith('/') ? path : '/' + path;
+    return (API ? API : '') + '/api' + p;
+  }
   let currentUser = null;
 
   // Load user from sessionStorage
@@ -134,39 +144,7 @@ document.querySelectorAll('.wash-card,.plan-card,.promo-card').forEach(card => {
   }
   updateSigninUI();
 
-  // Create auth modal
-  const authModal = document.createElement('div');
-  authModal.id = 'authModal';
-  authModal.style.cssText = 'position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.6);z-index:20000;visibility:hidden;opacity:0;transition:opacity 0.2s,visibility 0.2s;';
-  authModal.innerHTML = `
-    <div style="background:var(--panel);border:1px solid var(--border);padding:2rem;border-radius:10px;min-width:340px;max-width:450px;">
-      <h3 style="color:white;margin-bottom:1rem;font-family:Orbitron,monospace;">Sign In or Create Account</h3>
-      <div class="form-group" style="margin-bottom:1rem;">
-        <label style="display:block;font-size:0.8rem;color:var(--cyan);margin-bottom:0.4rem;">Email</label>
-        <input id="authEmail" type="email" placeholder="you@example.com" style="width:100%;padding:0.7rem;border:1px solid rgba(0,245,255,0.2);background:rgba(0,0,0,0.3);color:white;font-family:Rajdhani,sans-serif;" />
-      </div>
-      <div class="form-group" style="margin-bottom:1rem;">
-        <label style="display:block;font-size:0.8rem;color:var(--cyan);margin-bottom:0.4rem;">Password</label>
-        <input id="authPassword" type="password" placeholder="••••••••" style="width:100%;padding:0.7rem;border:1px solid rgba(0,245,255,0.2);background:rgba(0,0,0,0.3);color:white;font-family:Rajdhani,sans-serif;" />
-      </div>
-      <div class="form-group" style="margin-bottom:1.5rem;">
-        <label style="display:block;font-size:0.8rem;color:var(--cyan);margin-bottom:0.4rem;">Full Name (if creating account)</label>
-        <input id="authName" type="text" placeholder="Your name" style="width:100%;padding:0.7rem;border:1px solid rgba(0,245,255,0.2);background:rgba(0,0,0,0.3);color:white;font-family:Rajdhani,sans-serif;" />
-      </div>
-      <div style="display:flex;gap:0.6rem;justify-content:flex-end;">
-        <button id="authClose" style="background:transparent;border:1px solid var(--border);padding:0.6rem 0.9rem;color:var(--text);cursor:none;">Cancel</button>
-        <button id="authSubmit" style="background:linear-gradient(135deg,var(--blue),var(--cyan));border:none;padding:0.6rem 0.9rem;color:var(--dark);font-weight:700;cursor:none;">Sign In</button>
-      </div>
-    </div>
-  `;
-  document.body.appendChild(authModal);
-
-  function showAuth(show) {
-    authModal.style.visibility = show ? 'visible' : 'hidden';
-    authModal.style.opacity = show ? '1' : '0';
-  }
-
-  // Auth handlers
+  // Sign-in modal removed. Clicking the Sign In link now navigates to the sign-up page when not signed in.
   document.body.addEventListener('click', e => {
     const signin = e.target.closest('.nav-signin');
     if (!signin) return;
@@ -177,59 +155,8 @@ document.querySelectorAll('.wash-card,.plan-card,.promo-card').forEach(card => {
       updateSigninUI();
       alert('Signed out');
     } else {
-      // Show sign-in
-      showAuth(true);
-    }
-  });
-
-  document.getElementById('authClose').addEventListener('click', () => showAuth(false));
-  document.getElementById('authSubmit').addEventListener('click', async () => {
-    const email = document.getElementById('authEmail').value.trim();
-    const password = document.getElementById('authPassword').value.trim();
-    const name = document.getElementById('authName').value.trim();
-
-    if (!email || !password) return alert('Email and password required');
-
-    try {
-      // Try sign-in first
-      let res = await fetch(API + '/api/auth/signin', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password })
-      });
-      let data = await res.json();
-
-      if (!res.ok) {
-        // Try sign-up
-        if (!name) return alert('Name required to create account');
-        res = await fetch(API + '/api/auth/signup', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ email, password, name })
-        });
-        data = await res.json();
-        if (!res.ok) return alert('Sign-up failed: ' + (data.error || 'Unknown error'));
-        // Now sign in
-        res = await fetch(API + '/api/auth/signin', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ email, password })
-        });
-        data = await res.json();
-      }
-
-      if (data.success) {
-        currentUser = data.user;
-        sessionStorage.setItem('currentUser', JSON.stringify(currentUser));
-        updateSigninUI();
-        showAuth(false);
-        document.getElementById('authEmail').value = '';
-        document.getElementById('authPassword').value = '';
-        document.getElementById('authName').value = '';
-        alert('Welcome, ' + currentUser.email);
-      }
-    } catch (err) {
-      alert('Error: ' + err.message + ' (make sure backend server is running on localhost:3000)');
+      // Redirect to the standalone signup/signin page
+      window.location.href = 'signup.html';
     }
   });
 
@@ -269,7 +196,7 @@ document.querySelectorAll('.wash-card,.plan-card,.promo-card').forEach(card => {
     const amount = amountText.match(/₦([\d,]+)/)?.[1]?.replace(/,/g, '') || '0';
 
     try {
-      const res = await fetch(API + '/api/subscribe', {
+      const res = await fetch(api('/subscribe'), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ user_id: currentUser.id, plan, amount: parseFloat(amount), billing })
